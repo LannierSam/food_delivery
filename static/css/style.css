@@ -1,0 +1,101 @@
+/* Additional custom styles for Campus Dish */
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 60px 0;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.testimonial-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.stats-section {
+    background-color: var(--light-color);
+    padding: 40px 0;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.vendor-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.menu-category-tabs {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.menu-category-tabs .nav-link {
+    border: none;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.menu-category-tabs .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.order-status {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.order-status.pending {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.order-status.confirmed {
+    background-color: #d1ecf1;
+    border-left: 4px solid #17a2b8;
+}
+
+.order-status.preparing {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+.order-status.delivered {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 40px 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .filter-btn {
+        margin: 2px;
+        font-size: 0.9rem;
+    }
+    
+    .food-card img,
+    .vendor-card img {
+        height: 150px;
+    }
+}
