@@ -99,3 +99,13 @@
         height: 150px;
     }
 }
+
+.carousel-img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+#heroCarousel .carousel-inner {
+    height: 300px;
+}
