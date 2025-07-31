@@ -7,7 +7,7 @@
     <!-- Vendor Header -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card">
+            <div class="card shadow-lg">
                 <div class="row g-0">
                     <div class="col-md-4">
                         {% if vendor.image %}
@@ -23,22 +23,30 @@
                             <h2 class="card-title">{{ vendor.name }}</h2>
                             <p class="card-text">{{ vendor.description }}</p>
                             
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-star text-warning me-2"></i>
+                            <div class="row mt-4">
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rating me-2">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= vendor.rating|floatformat:"0" %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
                                         <span>{{ vendor.rating }} ({{ vendor.review_count }} reviews)</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-map-marker-alt text-primary me-2 fa-lg"></i>
                                         <span>{{ vendor.distance }} km away</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-clock text-success me-2"></i>
+                                <div class="col-md-4 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-clock text-success me-2 fa-lg"></i>
                                         <span>{{ vendor.delivery_time }}</span>
                                     </div>
                                 </div>
@@ -53,13 +61,13 @@
     <!-- Menu Items -->
     <div class="row">
         <div class="col-12">
-            <h4 class="mb-4">Menu</h4>
+            <h3 class="section-title">Menu</h3>
         </div>
     </div>
 
     <div class="row">
         {% for item in menu_items %}
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4 fade-in delay-{{ forloop.counter0|divisibleby:3|add:forloop.counter0|divisibleby:3 }}">
                 <div class="card food-card h-100">
                     {% if item.image %}
                         <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
@@ -78,18 +86,12 @@
                             <span class="badge bg-secondary">{{ item.get_category_display }}</span>
                         </div>
                         
-                        {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'orders:add_to_cart' item.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="fas fa-cart-plus"></i> Add to Cart
-                                </button>
-                            </form>
-                        {% else %}
-                            <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary w-100">
-                                Login to Order
-                            </a>
-                        {% endif %}
+                        <form method="post" action="{% url 'orders:add_to_cart' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

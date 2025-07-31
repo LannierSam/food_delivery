@@ -12,7 +12,7 @@ class Order(models.Model):
         ('cancelled', 'Cancelled'),
     ]
     
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
     delivery_address = models.TextField()
     phone = models.CharField(max_length=15)
@@ -24,7 +24,10 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f"Order #{self.id} - {self.customer.username}"
+        if self.customer:
+            return f"Order #{self.id} - {self.customer.username}"
+        else:
+            return f"Order #{self.id} - {self.customer_name}"
     
     @property
     def subtotal(self):
@@ -44,12 +47,17 @@ class OrderItem(models.Model):
         return self.quantity * self.price
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f"Cart - {self.user.username}"
+        if self.user:
+            return f"Cart - {self.user.username}"
+        elif self.session_key:
+            return f"Cart - Anonymous ({self.session_key[:8]})"
+        return "Cart - Unknown"
     
     @property
     def total_items(self):
@@ -73,3 +81,13 @@ class CartItem(models.Model):
     @property
     def total_price(self):
         return self.quantity * self.menu_item.price
+
+class OrderNotification(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='notifications')
+    vendor = models.ForeignKey('vendors.Vendor', on_delete=models.CASCADE)
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Notification for Order #{self.order.id} - {self.vendor.name}"

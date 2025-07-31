@@ -3,26 +3,47 @@
 {% block title %}Campus Dish - Home{% endblock %}
 
 {% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1>Delicious Food Delivered to Your Doorstep</h1>
+        <p class="lead">Discover the best local restaurants and get your favorite meals delivered fast</p>
+        <div class="mt-4">
+            <a href="#popular-dishes" class="btn btn-light btn-lg me-3 float">Order Now</a>
+            <a href="#featured-vendors" class="btn btn-outline-light btn-lg float">View Restaurants</a>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid p-0">
-    <!-- Map Section -->
-    <div class="bg-light py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">
-                                <i class="fas fa-map-marker-alt text-primary"></i> 
-                                Delivery Area Map
-                            </h5>
-                            <div class="bg-secondary rounded" style="height: 200px; display: flex; align-items: center; justify-content: center;">
-                                <p class="text-white mb-0">
-                                    <i class="fas fa-map fa-3x"></i><br>
-                                    Interactive Map Coming Soon
-                                </p>
-                            </div>
-                        </div>
+    <!-- Features Section -->
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4 fade-in delay-1">
+                <div class="feature-card float">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
                     </div>
+                    <h4>Wide Selection</h4>
+                    <p>Choose from hundreds of delicious dishes from local restaurants</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 fade-in delay-2">
+                <div class="feature-card float">
+                    <div class="feature-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h4>Fast Delivery</h4>
+                    <p>Get your food delivered in 30 minutes or less</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 fade-in delay-3">
+                <div class="feature-card float">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h4>Best Prices</h4>
+                    <p>Enjoy great prices with exclusive discounts and offers</p>
                 </div>
             </div>
         </div>
@@ -32,11 +53,11 @@
     <div class="container my-4">
         <div class="row">
             <div class="col-12">
-                <h4 class="mb-3">Browse by Category</h4>
-                <div class="d-flex flex-wrap">
+                <h3 class="section-title">Browse by Category</h3>
+                <div class="d-flex flex-wrap justify-content-center">
                     {% for category in categories %}
-                        <a href="?category={{ category }}" 
-                           class="btn filter-btn {% if current_category == category %}btn-primary active{% else %}btn-outline-primary{% endif %}">
+                        <a href="?category={{ category }}"
+                           class="btn filter-btn {% if current_category == category %}btn-primary active pulse{% else %}btn-outline-primary{% endif %} fade-in delay-{{ forloop.counter }}">
                             {% if category == 'all' %}
                                 <i class="fas fa-th-large"></i> All
                             {% elif category == 'rice' %}
@@ -54,16 +75,16 @@
     </div>
 
     <!-- Popular Items Section -->
-    <div class="container">
+    <div class="container" id="popular-dishes">
         <div class="row">
             <div class="col-12">
-                <h4 class="mb-4">Popular Dishes</h4>
+                <h3 class="section-title">Popular Dishes</h3>
             </div>
         </div>
         
         <div class="row">
             {% for item in popular_items %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 fade-in delay-{{ forloop.counter0|divisibleby:4|add:forloop.counter0|divisibleby:4 }}">
                     <div class="card food-card h-100">
                         {% if item.image %}
                             <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
@@ -107,16 +128,16 @@
 
     <!-- Vendors Section -->
     {% if vendors %}
-    <div class="container mt-5">
+    <div class="container mt-5" id="featured-vendors">
         <div class="row">
             <div class="col-12">
-                <h4 class="mb-4">Featured Vendors</h4>
+                <h3 class="section-title">Featured Vendors</h3>
             </div>
         </div>
         
         <div class="row">
             {% for vendor in vendors %}
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4 fade-in delay-{{ forloop.counter0|divisibleby:3|add:forloop.counter0|divisibleby:3 }}">
                     <div class="card vendor-card h-100">
                         {% if vendor.image %}
                             <img src="{{ vendor.image.url }}" class="card-img-top" alt="{{ vendor.name }}">

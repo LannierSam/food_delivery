@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Vendor, MenuItem
+from orders.models import OrderNotification
 
 def home(request):
     category = request.GET.get('category', 'all')
