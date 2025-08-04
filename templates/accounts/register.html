@@ -3,67 +3,230 @@
 {% block title %}Register - Campus Dish{% endblock %}
 
 {% block content %}
-<div class="container my-5">
+<div class="container my-5 registration-form">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white text-center">
                     <h3>
-                        <i class="fas fa-user-plus"></i> Join Campus Dish
+                        {% if selected_role == 'vendor' %}
+                            <i class="fas fa-store"></i> Register as Food Vendor
+                        {% elif selected_role == 'delivery_partner' %}
+                            <i class="fas fa-motorcycle"></i> Register as Delivery Partner
+                        {% else %}
+                            <i class="fas fa-user-plus"></i> Join Campus Dish
+                        {% endif %}
                     </h3>
+                    {% if selected_role == 'vendor' %}
+                        <p class="mb-0 small">Start your food business with us!</p>
+                    {% elif selected_role == 'delivery_partner' %}
+                        <p class="mb-0 small">Join our delivery team and earn money!</p>
+                    {% endif %}
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
-                        <div class="mb-3 fade-in delay-1">
-                            <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
-                            {{ form.username }}
-                            {% if form.username.errors %}
-                                <div class="text-danger">{{ form.username.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mb-3 fade-in delay-2">
-                            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
-                            {{ form.email }}
-                            {% if form.email.errors %}
-                                <div class="text-danger">{{ form.email.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mb-3 fade-in delay-3">
-                            <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number (Optional)</label>
-                            {{ form.phone }}
-                            {% if form.phone.errors %}
-                                <div class="text-danger">{{ form.phone.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mb-3 fade-in delay-4">
-                            <label for="{{ form.role.id_for_label }}" class="form-label">Register as</label>
-                            {{ form.role }}
-                            {% if form.role.errors %}
-                                <div class="text-danger">{{ form.role.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mb-3 fade-in delay-5">
-                            <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
-                            {{ form.password1 }}
-                            {% if form.password1.errors %}
-                                <div class="text-danger">{{ form.password1.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="mb-3 fade-in delay-6">
-                            <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm Password</label>
-                            {{ form.password2 }}
-                            {% if form.password2.errors %}
-                                <div class="text-danger">{{ form.password2.errors }}</div>
-                            {% endif %}
-                        </div>
-                        
+                        {% if selected_role == 'vendor' %}
+                            <!-- Profile Picture Upload Container -->
+                            <div class="mb-3 fade-in delay-0 vendor-field" style="display: flex; flex-direction: column; align-items: flex-start;">
+                                <label class="photo-button" for="id_profile_picture">
+                                    <i class="fas fa-camera"></i>
+                                    Add Photo
+                                </label>
+                                <input type="file" name="profile_picture" id="id_profile_picture" class="d-none" accept="image/*">
+                                <div class="profile-picture-info">
+                                    <small class="text-muted">Optional • JPG, PNG • Max 5MB</small>
+                                </div>
+                                {% if form.profile_picture.errors %}
+                                    <div class="text-danger mt-2">{{ form.profile_picture.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3 fade-in delay-1 vendor-field">
+                                <label class="form-label"><i class="fas fa-store" style="color: #ff6b35;"></i>Business Name</label>
+                                {{ form.business_name }}
+                                {% if form.business_name.errors %}
+                                    <div class="text-danger">{{ form.business_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-2 vendor-field">
+                                <label class="form-label"><i class="fas fa-envelope" style="color: #ff6b35;"></i>Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-3 vendor-field">
+                                <label class="form-label"><i class="fas fa-phone" style="color: #ff6b35;"></i>Phone Number</label>
+                                {{ form.phone_number }}
+                                {% if form.phone_number.errors %}
+                                    <div class="text-danger">{{ form.phone_number.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-4 vendor-field">
+                                <label class="form-label"><i class="fas fa-map-marker-alt" style="color: #ff6b35;"></i>Business Address</label>
+                                {{ form.business_address }}
+                                {% if form.business_address.errors %}
+                                    <div class="text-danger">{{ form.business_address.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-5 vendor-field">
+                                <label class="form-label"><i class="fas fa-info-circle" style="color: #ff6b35;"></i>Business Description</label>
+                                {{ form.business_description }}
+                                {% if form.business_description.errors %}
+                                    <div class="text-danger">{{ form.business_description.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-6 vendor-field">
+                                <label class="form-label"><i class="fas fa-file-upload" style="color: #ff6b35;"></i>Upload Business License</label>
+                                {{ form.business_license }}
+                                {% if form.business_license.errors %}
+                                    <div class="text-danger">{{ form.business_license.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-7 vendor-field">
+                                <label class="form-label"><i class="fas fa-lock" style="color: #ff6b35;"></i>Password</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger">{{ form.password1.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-8 vendor-field">
+                                <label class="form-label"><i class="fas fa-lock" style="color: #ff6b35;"></i>Confirm Password</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger">{{ form.password2.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% elif selected_role == 'delivery_partner' %}
+                            <div class="mb-3 fade-in delay-1 delivery-field">
+                                <label class="form-label"><i class="fas fa-user" style="color: #ff6b35;"></i>Full Name</label>
+                                {{ form.full_name }}
+                                {% if form.full_name.errors %}
+                                    <div class="text-danger">{{ form.full_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-2 delivery-field">
+                                <label class="form-label"><i class="fas fa-envelope" style="color: #ff6b35;"></i>Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-3 delivery-field">
+                                <label class="form-label"><i class="fas fa-phone" style="color: #ff6b35;"></i>Phone Number</label>
+                                {{ form.phone_number }}
+                                {% if form.phone_number.errors %}
+                                    <div class="text-danger">{{ form.phone_number.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-4 delivery-field">
+                                <label class="form-label"><i class="fas fa-motorcycle" style="color: #ff6b35;"></i>Vehicle Type/Number</label>
+                                {{ form.vehicle_type_number }}
+                                {% if form.vehicle_type_number.errors %}
+                                    <div class="text-danger">{{ form.vehicle_type_number.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-5 delivery-field">
+                                <label class="form-label"><i class="fas fa-id-card" style="color: #ff6b35;"></i>Upload Driver's License</label>
+                                {{ form.drivers_license }}
+                                {% if form.drivers_license.errors %}
+                                    <div class="text-danger">{{ form.drivers_license.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-6 delivery-field emergency-contact">
+                                <label class="form-label"><i class="fas fa-phone-alt" style="color: #ff6b35;"></i>Emergency Contact</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label"><i class="fas fa-user"></i>Name</label>
+                                        {{ form.emergency_contact_name }}
+                                        {% if form.emergency_contact_name.errors %}
+                                            <div class="text-danger">{{ form.emergency_contact_name.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label"><i class="fas fa-phone"></i>Phone Number</label>
+                                        {{ form.emergency_contact_phone }}
+                                        {% if form.emergency_contact_phone.errors %}
+                                            <div class="text-danger">{{ form.emergency_contact_phone.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 fade-in delay-7 delivery-field">
+                                <label class="form-label"><i class="fas fa-camera" style="color: #ff6b35;"></i>Upload Vehicle Photo</label>
+                                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                                    <label class="photo-button" for="id_vehicle_photo">
+                                    <i class="fas fa-camera"></i>
+                                    Add Photo
+                                    </label>
+                                    {{ form.vehicle_photo }}
+                                </div>
+                                {% if form.vehicle_photo.errors %}
+                                    <div class="text-danger">{{ form.vehicle_photo.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-8 delivery-field">
+                                <label class="form-label"><i class="fas fa-lock" style="color: #ff6b35;"></i>Password</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger">{{ form.password1.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-9 delivery-field">
+                                <label class="form-label"><i class="fas fa-lock" style="color: #ff6b35;"></i>Confirm Password</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger">{{ form.password2.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <!-- Default fields if no role is selected -->
+                            <div class="mb-3 fade-in delay-1">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <div class="text-danger">{{ form.username.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-2">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-3">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number (Optional)</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="text-danger">{{ form.phone.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-4">
+                                <label for="{{ form.role.id_for_label }}" class="form-label">Register as</label>
+                                {{ form.role }}
+                                {% if form.role.errors %}
+                                    <div class="text-danger">{{ form.role.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-5">
+                                <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger">{{ form.password1.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 fade-in delay-6">
+                                <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm Password</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger">{{ form.password2.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
                         {% if form.non_field_errors %}
                             <div class="alert alert-danger">
                                 {{ form.non_field_errors }}
@@ -71,7 +234,13 @@
                         {% endif %}
                         
                         <button type="submit" class="btn btn-primary w-100 btn-lg">
-                            <i class="fas fa-user-plus"></i> Register
+                            {% if selected_role == 'vendor' %}
+                                <i class="fas fa-store"></i> Register as Food Vendor
+                            {% elif selected_role == 'delivery_partner' %}
+                                <i class="fas fa-motorcycle"></i> Register as Delivery Partner
+                            {% else %}
+                                <i class="fas fa-user-plus"></i> Register
+                            {% endif %}
                         </button>
                     </form>
                     
@@ -88,23 +257,353 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const roleField = document.getElementById('{{ form.role.id_for_label }}');
-    roleField.classList.add('form-select', 'form-select-lg');
+    // Auto-detect and style all form fields
+    const allInputs = document.querySelectorAll('input, select, textarea');
     
-    const usernameField = document.getElementById('{{ form.username.id_for_label }}');
-    usernameField.classList.add('form-control', 'form-control-lg');
-    
-    const emailField = document.getElementById('{{ form.email.id_for_label }}');
-    emailField.classList.add('form-control', 'form-control-lg');
-    
-    const phoneField = document.getElementById('{{ form.phone.id_for_label }}');
-    phoneField.classList.add('form-control', 'form-control-lg');
-    
-    const password1Field = document.getElementById('{{ form.password1.id_for_label }}');
-    password1Field.classList.add('form-control', 'form-control-lg');
-    
-    const password2Field = document.getElementById('{{ form.password2.id_for_label }}');
-    password2Field.classList.add('form-control', 'form-control-lg');
+    allInputs.forEach(function(field) {
+        // Apply appropriate Bootstrap classes based on field type
+        if (field.tagName.toLowerCase() === 'select') {
+            field.classList.add('form-select', 'form-select-lg');
+        } else if (field.type === 'file') {
+            field.classList.add('form-control');
+        } else {
+            field.classList.add('form-control', 'form-control-lg');
+        }
+    });
+
+    // Add placeholder enhancements for better UX
+    const formControls = document.querySelectorAll('.form-control, .form-select');
+    formControls.forEach(function(control) {
+        if (control.type !== 'file' && control.type !== 'password' && control.type !== 'hidden') {
+            const label = control.closest('.mb-3').querySelector('.form-label');
+            if (label && !control.placeholder) {
+                // Extract text from label, removing icons
+                const labelText = label.textContent.trim().replace(/[🏪🏍️📧📞🗺️ℹ️📁🔒👤🆔📷📞]/g, '').trim();
+                if (labelText && labelText !== 'Emergency Contact') {
+                    control.placeholder = `Enter your ${labelText.toLowerCase()}`;
+                }
+            }
+        }
+
+        // Add focus and blur effects
+        control.addEventListener('focus', function() {
+            this.closest('.mb-3').classList.add('focused');
+            this.style.transform = 'translateY(-1px)';
+        });
+
+        control.addEventListener('blur', function() {
+            this.closest('.mb-3').classList.remove('focused');
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Enhanced file input handling
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(function(fileInput) {
+        // Create file info display
+        const fileInfo = document.createElement('div');
+        fileInfo.className = 'file-info mt-2';
+        fileInput.parentNode.appendChild(fileInfo);
+
+        fileInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                const file = this.files[0];
+                const fileName = file.name;
+                const fileSize = (file.size / 1024 / 1024).toFixed(2); // Convert to MB
+                
+                fileInfo.innerHTML = `
+                    <small class="text-success d-flex align-items-center">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span><strong>${fileName}</strong> (${fileSize} MB)</span>
+                    </small>
+                `;
+                
+                this.classList.add('file-selected');
+            } else {
+                fileInfo.innerHTML = '<small class="text-muted">No file chosen</small>';
+                this.classList.remove('file-selected');
+            }
+        });
+
+        // Add drag and drop functionality
+        fileInput.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+
+        fileInput.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+        });
+
+        fileInput.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+        });
+    });
+
+    // Form validation with visual feedback
+    const form = document.querySelector('form');
+    if (form) {
+        // Real-time validation
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(function(input) {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('is-invalid')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+
+            requiredFields.forEach(function(field) {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                // Scroll to first invalid field
+                const firstInvalid = form.querySelector('.is-invalid');
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalid.focus();
+                }
+            }
+        });
+    }
+
+    function validateField(field) {
+        const value = field.value.trim();
+        let isValid = true;
+
+        // Remove existing validation classes
+        field.classList.remove('is-valid', 'is-invalid');
+
+        // Check if required field is empty
+        if (field.hasAttribute('required') && !value) {
+            field.classList.add('is-invalid');
+            isValid = false;
+        }
+        // Email validation
+        else if (field.type === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                field.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                field.classList.add('is-valid');
+            }
+        }
+        // Phone validation (basic)
+        else if (field.name && field.name.includes('phone') && value) {
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            if (!phoneRegex.test(value)) {
+                field.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                field.classList.add('is-valid');
+            }
+        }
+        // Password validation
+        else if (field.type === 'password' && value) {
+            if (value.length < 8) {
+                field.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                field.classList.add('is-valid');
+            }
+        }
+        // General validation for non-empty fields
+        else if (value) {
+            field.classList.add('is-valid');
+        }
+
+        return isValid;
+    }
+
+    // Password strength indicator
+    const passwordFields = document.querySelectorAll('input[type="password"]');
+    passwordFields.forEach(function(passwordField) {
+        if (passwordField.name && passwordField.name.includes('password1')) {
+            passwordField.addEventListener('input', function() {
+                const password = this.value;
+                const strength = calculatePasswordStrength(password);
+                updatePasswordStrengthIndicator(this, strength);
+            });
+        }
+    });
+
+    function calculatePasswordStrength(password) {
+        let strength = 0;
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+        return strength;
+    }
+
+    function updatePasswordStrengthIndicator(field, strength) {
+        let indicator = field.parentNode.querySelector('.password-strength');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.className = 'password-strength mt-2';
+            field.parentNode.appendChild(indicator);
+        }
+
+        const strengthTexts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+        const strengthColors = ['danger', 'warning', 'info', 'success', 'success'];
+        
+        if (field.value.length > 0) {
+            const strengthIndex = Math.min(strength, 4);
+            indicator.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-${strengthColors[strengthIndex]}">
+                        <i class="fas fa-shield-alt me-1"></i>
+                        Password Strength: ${strengthTexts[strengthIndex]}
+                    </small>
+                </div>
+                <div class="progress mt-1" style="height: 4px;">
+                    <div class="progress-bar bg-${strengthColors[strengthIndex]}"
+                         style="width: ${(strengthIndex + 1) * 20}%; transition: width 0.3s ease;"></div>
+                </div>
+            `;
+        } else {
+            indicator.innerHTML = '';
+        }
+    }
+
+    // Add loading state to submit button
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (submitBtn && form) {
+        form.addEventListener('submit', function() {
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+            submitBtn.disabled = true;
+        });
+    }
+
+    // Profile Picture Upload Functionality
+    const profilePictureInput = document.getElementById('id_profile_picture');
+    const profilePicturePreview = document.getElementById('profilePicturePreview');
+    const removeProfilePictureBtn = document.getElementById('removeProfilePicture');
+
+    if (profilePictureInput && profilePicturePreview) {
+        // Add CSS class to hide the default file input
+        profilePictureInput.classList.add('profile-picture-input');
+
+        // Handle file selection
+        profilePictureInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file type
+                if (!file.type.match('image.*')) {
+                    alert('Please select a valid image file (JPG, PNG, GIF)');
+                    this.value = '';
+                    return;
+                }
+
+                // Validate file size (5MB max)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    this.value = '';
+                    return;
+                }
+
+                // Create preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Profile Picture';
+                    
+                    // Clear existing content and add image
+                    profilePicturePreview.innerHTML = '';
+                    profilePicturePreview.appendChild(img);
+                    
+                    // Add overlay and remove button
+                    const overlay = document.createElement('div');
+                    overlay.className = 'upload-overlay';
+                    overlay.innerHTML = '<i class="fas fa-camera"></i>';
+                    profilePicturePreview.appendChild(overlay);
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'profile-picture-remove';
+                    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    removeBtn.onclick = removeProfilePicture;
+                    profilePicturePreview.appendChild(removeBtn);
+                    
+                    // Add has-image class
+                    profilePicturePreview.classList.add('has-image');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle click on preview to open file dialog
+        profilePicturePreview.addEventListener('click', function() {
+            profilePictureInput.click();
+        });
+
+        // Remove profile picture function
+        function removeProfilePicture() {
+            profilePictureInput.value = '';
+            profilePicturePreview.innerHTML = `
+                <div class="upload-overlay">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <button type="button" class="profile-picture-remove" id="removeProfilePicture">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            profilePicturePreview.classList.remove('has-image');
+            
+            // Re-attach event listener to new remove button
+            const newRemoveBtn = document.getElementById('removeProfilePicture');
+            if (newRemoveBtn) {
+                newRemoveBtn.onclick = removeProfilePicture;
+            }
+        }
+
+        // Attach remove function to initial button
+        if (removeProfilePictureBtn) {
+            removeProfilePictureBtn.onclick = removeProfilePicture;
+        }
+
+        // Drag and drop functionality
+        profilePicturePreview.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#007bff';
+            this.style.backgroundColor = '#f0f8ff';
+        });
+
+        profilePicturePreview.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#007bff';
+            this.style.backgroundColor = '';
+        });
+
+        profilePicturePreview.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.borderColor = '#007bff';
+            this.style.backgroundColor = '';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                profilePictureInput.files = files;
+                profilePictureInput.dispatchEvent(new Event('change'));
+            }
+        });
+    }
 });
 </script>
 {% endblock %}

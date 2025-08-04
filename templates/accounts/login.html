@@ -44,11 +44,105 @@
                     </form>
                     
                     <div class="text-center mt-3">
-                        <p>Don't have an account? <a href="{% url 'accounts:register' %}">Register here</a></p>
+                        <p>Don't have an account? <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#registrationModal">Register here</button></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Registration Type Selection Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="registrationModalLabel">
+                    <i class="fas fa-user-plus"></i> Choose Registration Type
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <p class="lead">How would you like to join Campus Dish?</p>
+                </div>
+                
+                <div class="row g-3">
+                    <!-- Food Vendor Option -->
+                    <div class="col-md-6">
+                        <div class="card h-100 registration-option" onclick="selectRegistrationType('vendor')">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-store fa-3x "style="color: #ff6b35;"></i>
+                                </div>
+                                <h5 class="card-title">Join as a Food Vendor</h5>
+                                <p class="card-text">Reach more customers On Campus</p>
+                                <ul class="list-unstyled text-start small">
+                                    <li><i class="fas fa-check text-success me-2"></i>Manage your menu</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Track orders</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Set delivery areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Delivery Partner Option -->
+                    <div class="col-md-6">
+                        <div class="card h-100 registration-option" onclick="selectRegistrationType('delivery_partner')">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-motorcycle fa-3x " style="color: #ff6b35;"></i>
+                                </div>
+                                <h5 class="card-title">Become a Delivery Partner</h5>
+                                <p class="card-text">Earn money by delivering food on Campus</p>
+                                <ul class="list-unstyled text-start small">
+                                    <li><i class="fas fa-check text-success me-2"></i>Flexible working hours</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Earn per delivery</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>Track your earnings</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- <div class="text-center mt-4">
+                    <p class="text-muted small">
+                        <i class="fas fa-info-circle"></i>
+                        Just want to order food? You can register as a customer directly from the registration page.
+                    </p>
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <!-- s -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.registration-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.registration-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color:  #f7931e;
+}
+
+.registration-option:active {
+    transform: translateY(-2px);
+}
+</style>
+
+<script>
+function selectRegistrationType(role) {
+    // Redirect to registration page with role parameter
+    window.location.href = "{% url 'accounts:register' %}?role=" + role;
+}
+</script>
+
 {% endblock %}

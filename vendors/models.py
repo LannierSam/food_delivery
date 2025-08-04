@@ -34,3 +34,39 @@ class MenuItem(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.vendor.name}"
+    
+    def get_default_image(self):
+        """Return a default static image path based on the menu item name"""
+        name_lower = self.name.lower()
+        
+        # Map food names to static images
+        image_mapping = {
+            'banku': 'img/Banku.jpeg.jpg',
+            'jollof': 'img/Jollof.jpg',
+            'fried rice': 'img/Fried rice.jpg',
+            'rice': 'img/Rice with stew.jpg',
+            'fufu': 'img/Fufu.jpg',
+            'waakye': 'img/waakye.jpg',
+            'kenkey': 'img/Kenkey.jpg',
+            'beans': 'img/Beans.jpg',
+            'spaghetti': 'img/spag.jpg',
+            'spag': 'img/spag.jpg',
+            'gob3': 'img/G)b3.jpg',
+            'gobe': 'img/G)b3.jpg',
+            'apesie': 'img/Apesie.jpg',
+            'groundnut soup': 'img/peanut_soup.webp',
+            'palm nut soup': 'img/palmnut soup.jpg',
+            'light soup': 'img/lightsoup.jpg',
+            'kelewele': 'img/Kelewele.jpg',
+            'meat pie': 'img/meat pie.jpg',
+            'chin chin': 'img/chin chin.jpg',
+            'bofrot': 'img/bofrot.jpg',
+        }
+        
+        # Check for exact matches first
+        for key, image_path in image_mapping.items():
+            if key in name_lower:
+                return image_path
+        
+        # Return None if no match found (will show placeholder)
+        return None

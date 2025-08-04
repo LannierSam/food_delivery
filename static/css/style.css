@@ -109,3 +109,487 @@
 #heroCarousel .carousel-inner {
     height: 300px;
 }
+
+/* Registration Form Styling */
+.registration-form .card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.registration-form .card-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-bottom: none;
+    padding: 2rem 1.5rem;
+}
+
+.registration-form .card-body {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Form Field Styling */
+.form-control, .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+    background-color: #ffffff;
+}
+
+.form-control:hover, .form-select:hover {
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-label i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+/* File Input Styling */
+.form-control[type="file"] {
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-style: dashed;
+}
+
+.form-control[type="file"]:hover {
+    background-color: #e9ecef;
+}
+
+/* Textarea Styling */
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Error Messages */
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Submit Button Enhancement */
+.btn-primary.w-100.btn-lg {
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary.w-100.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+.delay-7 { animation-delay: 0.7s; }
+.delay-8 { animation-delay: 0.8s; }
+.delay-9 { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Emergency Contact Row Styling */
+.emergency-contact .row .col {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Role-specific Field Icons */
+.vendor-field .form-label::before {
+    content: "🏪";
+    margin-right: 8px;
+}
+
+.delivery-field .form-label::before {
+    content: "🏍️";
+    margin-right: 8px;
+}
+
+/* Input Group Styling for Better Visual Hierarchy */
+.form-floating {
+    position: relative;
+}
+
+.form-floating > .form-control,
+.form-floating > .form-select {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Focus States and Validation */
+.focused .form-control,
+.focused .form-select {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #28a745;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='m2.3 6.73.94-.94 1.38 1.38'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 4.6 2.4 2.4m0-2.4L5.8 7'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* File Input Enhancements */
+.form-control[type="file"].file-selected {
+    border-color: #28a745;
+    background-color: #f8fff9;
+}
+
+.form-control[type="file"].drag-over {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    border-style: solid;
+}
+
+.file-info {
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 8px;
+}
+
+.password-strength .progress {
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.password-strength .progress-bar {
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Loading Button State */
+.btn-primary:disabled {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Enhanced Form Field Icons */
+.vendor-field .form-label::before,
+.delivery-field .form-label::before {
+    font-size: 1.1em;
+    margin-right: 8px;
+    opacity: 0.8;
+}
+
+/* Improved Emergency Contact Layout */
+.emergency-contact .row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.emergency-contact .row .col {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Form Field Hover Effects */
+.form-control:not(:focus):hover,
+.form-select:not(:focus):hover {
+    border-color: #80bdff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+/* Textarea Specific Styling */
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+/* Select Field Enhancements */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.form-select:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23007bff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+}
+
+/* Card Shadow Enhancement */
+.registration-form .card.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .registration-form .card-body {
+        padding: 1.5rem;
+    }
+    
+    .form-control, .form-select {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+    }
+    
+    .emergency-contact .row .col {
+        margin-bottom: 1rem;
+    }
+    
+    .btn-primary.w-100.btn-lg {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    .registration-form .card-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .registration-form .card-header h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .registration-form .col-md-6 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .form-control, .form-select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Profile Picture Upload Container */
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: transparent;
+    border-radius: 15px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.profile-picture-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid orange;
+    background-color: #f5ede4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: orange;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.profile-picture-preview:hover {
+    background-color: #ffe8cc;
+}
+
+.profile-picture-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.profile-picture-preview .upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 165, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+    font-size: 14px;
+}
+
+.profile-picture-preview:hover .upload-overlay {
+    opacity: 1;
+}
+
+.profile-picture-preview .camera-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.profile-picture-preview .add-photo-text {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.profile-picture-preview.default-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture-preview.default-state .camera-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+    color: orange;
+}
+
+.profile-picture-preview.default-state .add-photo-text {
+    color: orange;
+    font-size: 14px;
+}
+
+.profile-picture-input {
+    display: none;
+}
+
+.profile-picture-label {
+    display: none; /* Hide the label since we're using the preview as the button */
+}
+
+.profile-picture-info {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.profile-picture-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.profile-picture-remove:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+.profile-picture-preview.has-image .profile-picture-remove {
+    display: flex;
+}
+
+.profile-picture-preview.has-image {
+    background-color: #f5ede4;
+}
+
+.profile-picture-preview.has-image .camera-icon,
+.profile-picture-preview.has-image .add-photo-text {
+    display: none;
+}
+
+/* Animation for profile picture container */
+.profile-picture-container.fade-in {
+    animation: profileFadeIn 0.8s ease forwards;
+}
+
+@keyframes profileFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
